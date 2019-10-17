@@ -555,7 +555,7 @@ class SBRG:
                     phase *= (1j)**(termj.mat.ipower())
                     struc_coef[(i,j)] = (phase.real, energy1-energy0)
                 else:
-                    struc_coef[(i,j)] = 0
+                    struc_coef[(i,j)] = ()
         return struc_coef
     def two_spin_chf2(self, ops, ground_state):
         ops.forward(self.RCC)
@@ -583,9 +583,9 @@ class SBRG:
                     for site in termj.mat.Xs:
                         ground_state[site] *= -1
                     phase *= (1j)**(termj.mat.ipower())
-                    struc_coef[(i,j)] = (phase.real, energy_difference)
+                    struc_coef[str(i)+"-"+str(j)] = (phase.real, energy_difference)
                 else:
-                    struc_coef[(i,j)] = 0
+                    struc_coef[str(i)+"-"+str(j)] = ()
         return struc_coef
     # return <state|op|state> for op in ops
     def measure_ops(self, ops, state):
@@ -607,8 +607,9 @@ class SBRG:
         spectrum = 0;
         for n in range(self.size):
             for m in range(self.size):
-                if not isinstance(struc_chf[(n,m)], int):
-                    spectrum += struc_chf[(n,m)][0] * lorentz_line(omega, struc_chf[(n,m)][1], delta)
+                if len(struc_chf[str(n)+"-"+str(m)])!=0:
+                # if not isinstance(struc_chf[(n,m)], int):
+                    spectrum += struc_chf[str(n)+"-"+str(m)][0] * lorentz_line(omega, struc_chf[str(n)+"-"+str(m)][1], delta)
         return spectrum/self.size*2
     # spin spectrum function in (q,\omega) space.
     def Sqw(self, struc_chf, q2ijs, omegas, delta):
@@ -622,8 +623,10 @@ class SBRG:
             #print(q)
             for i in range(self.size):
                 for j in range(self.size):
-                    if not isinstance(struc_chf[(i,j)], int):
-                        key = (i,j)
+                    if len(struc_chf[str(i)+"-"+str(j)])!=0:
+                    # if not isinstance(struc_chf[str(i)+"-"+str(j)], int):
+                        #key = (i,j)
+                        key = str(i)+"-"+str(j)
                         spectrum[:, _] += (lorentz_line(omegas, struc_chf[key][1], delta) * struc_chf[key][0] * (np.exp(1j*q[key])).real )
                         #print(np.cos(q2ij[key]))
 
