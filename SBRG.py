@@ -937,18 +937,18 @@ def sparse_triangular_XYZ(Lx, Ly, **para):
 # Toolbox 
 # I/O 
 # JSON pickle: export to communicate with Mathematica 
-import jsonpickle
-def export(filename, obj):
-    with open(filename + '.json', 'w') as outfile:
-        outfile.write(jsonpickle.encode(obj))
-def export_Ham(filename, ham):
-    export(filename, [[term.val,[list(term.mat.Xs),list(term.mat.Zs)]] for term in ham])
-import pickle
-# pickle: binary dump and load for python.
-def dump(filename, obj):
-    with open(filename + '.dat', 'bw') as outfile:
-        pickle.dump(obj, outfile)
-def load(filename):
-    with open(filename + '.dat', 'br') as infile:
-        return pickle.load(infile)
+# import jsonpickle
+# def export(filename, obj):
+#     with open(filename + '.json', 'w') as outfile:
+#         outfile.write(jsonpickle.encode(obj))
+# def export_Ham(filename, ham):
+#     export(filename, [[term.val,[list(term.mat.Xs),list(term.mat.Zs)]] for term in ham])
+# import pickle
+# # pickle: binary dump and load for python.
+# def dump(filename, obj):
+#     with open(filename + '.dat', 'bw') as outfile:
+#         pickle.dump(obj, outfile)
+# def load(filename):
+#     with open(filename + '.dat', 'br') as infile:
+#         return pickle.load(infile)
 
