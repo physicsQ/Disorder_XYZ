@@ -8,7 +8,7 @@ parser = argparse.ArgumentParser(description='')
 group = parser.add_argument_group('calculation  parameters')
 
 group.add_argument("-l", type=int,default = 22)
-group.add_argument("-delta",type=float default=0.1)
+group.add_argument("-delta",type=float, default=0.1)
 group.add_argument("-jx", type=float,default=1.0)
 group.add_argument("-jy", type=float,default=1.0)
 group.add_argument("-jz", type=float,default=1.0)
